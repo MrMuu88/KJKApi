@@ -9,4 +9,20 @@ step 1:
 step 2:
     installed dependecy packages:
         `npm install body-parser cors express helmet morgan`
-        
+
+    in the indexjs file:
+        initialized the express application
+        added a simple in memory array to mock a datastore
+        configured dependecies
+        created a single GET endpoint
+
+step 3:
+    the tutorial starts to use mongoose wich is a mongo db ODM system,
+    but I don't like going that way.
+    I would like to explore how can i define the api endpoints with express
+    first
+
+    dsicontinuing the tutorial.
+
+I'm startig to inquire about nodejs express module
+an interesting tutorial about routing: https://expressjs.com/en/guide/routing.html

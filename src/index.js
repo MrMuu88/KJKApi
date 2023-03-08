@@ -1,31 +1,50 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const helmet = require("helmet");
-const morgan = require("morgan");
 
 //define the express app
 const app = express();
 
 //add an array as a datastore (temp solution)
-const ads= [
-    {title:"Hello world 2!"}
+const users= [
+    {id:1, firstName:"Tamás", LastName:"Simon"},
+    {id:2, firstName:"Anett", lastName:"Simonné Bíró"},
+    {id:3, firstName:"Laura", lastName:"Simon"},
+    {id:4, firstName:"Kornél", lastName:"Simon"}
 ];
 
-//adding helmet to enchase your rest Api security
-app.use(helmet());
+//configure express for json body
+app.use(express.json());
 
-//adding bodyparser to parse json bodies into js objects
-app.use(bodyParser.json());
-
-//enabling CORS for all requests
-app.use(cors());
-
-//define a get endpoint to return all ads
-app.get('/',(req,res) => {
-    console.log("request is responded");
-    res.send(ads);
+//define a get endpoint to return all users
+app.get('/users/list',(req,res) => {
+    res.send(users);
 });
+
+//using url parameter to get by id
+app.get('/users/:userId',(req,res)=>{
+    let user = users.filter(u => u.id == req.params.userId)
+    res.send(user);
+});
+
+//consuming a body object
+app.put('/users/:userId',(req,res)=>{
+    var user = users.find(u => u.id == req.params.userId);
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    res.send(user);
+});
+
+app.post('/users',(req,res) => {
+    if(req.body.firstName === undefined || req.body.lastName === undefined){
+        return res.sendStatus(400).end();
+    }
+
+    var user = {id:users.length+1, firstName:req.body.firstName, lastName:req.body.lastName};
+    users.push(user);
+    res.send(user);
+});
+
+
+
 
 //starting the server
 
