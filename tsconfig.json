@@ -11,6 +11,7 @@
       "allowJs": true,
       "moduleResolution": "node",
       "sourceMap": true,
+      "experimentalDecorators": true,
       "types": [
         "node"
       ],

@@ -1,29 +1,18 @@
-import {Model,Optional,DataTypes, Sequelize} from "sequelize";
-import DbConnection from "../Database/DbConnection";
+import { STRING } from "sequelize";
+import {Table,Column, Model,DataType, Sequelize} from "sequelize-typescript";
 
-interface UserAttributes{
-    id:number;
-    loginName: string;
-    password: string;
-    email: string;
-
-    createdAt?: Date;
-    updatedAt?: Date;
-    deletedAt?: Date;
-}
-
-export interface UserInput extends Optional<UserAttributes,'id'>{}
-export interface UserOutput extends Required<UserAttributes>{}
-
-export class User extends Model<UserAttributes,UserInput> implements UserAttributes {
+@Table({timestamps:false,tableName:"Users"})
+export class User extends Model{
+    @Column({type:DataType.INTEGER.UNSIGNED,autoIncrement:true, primaryKey:true})
     id!: number;
+
+    @Column({type:STRING,allowNull:false})
     loginName!:string;
+    
+    @Column({type:STRING,allowNull:false})
     email!: string;
+
+    @Column({type:STRING,allowNull:false})
     password!: string;
-
-
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
-    public readonly deletedAt!: Date;
 }
 

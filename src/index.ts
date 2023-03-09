@@ -1,4 +1,5 @@
 import express,{Express} from 'express';
+import DbConnection from './Database/DbConnection';
 import {router} from "./router";
 
 
@@ -12,3 +13,5 @@ app.listen(3031,()=>{
 app.use(express.json());
 
 app.use(router);
+
+DbConnection.sync({alter:true});
