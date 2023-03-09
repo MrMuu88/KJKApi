@@ -3,3 +3,13 @@ Packages needed:
     typscript support:                          npm install typescript --save-dev
     node.js support for ts:                     npm install ts-node --save-dev
     auto download typedefinitions on moduls:    npm install -g typesync
+
+tsconfig.json controll how the tsc transpiller works
+
+commands:
+    tsc will transplie the .ts files to .js
+    node ./dist/index.js executes the program
+
+launch.json setup for debuging:
+    sourceMap property in tsconfig is have to set true to allow TS debuging
+    a prelaunch task should be added to launch json to transpile the ts files first
