@@ -1,0 +1,5 @@
+Packages needed:
+    the transpiller:                            npm install tsc -g
+    typscript support:                          npm install typescript --save-dev
+    node.js support for ts:                     npm install ts-node --save-dev
+    auto download typedefinitions on moduls:    npm install -g typesync
