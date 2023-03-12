@@ -15,3 +15,5 @@ app.use(express.json());
 app.use(router);
 
 DbConnection.sync({alter:true});
+
+DbConnection.sync();

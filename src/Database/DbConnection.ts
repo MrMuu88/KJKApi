@@ -1,5 +1,10 @@
-import {Sequelize} from "sequelize-typescript";
-import {User} from "../Models/user";
+import { Sequelize } from "sequelize-typescript";
+import { Choice } from "../Models/Choice";
+import { Encounter } from "../Models/Encounter";
+import { Item } from "../Models/Item";
+import { Monster } from "../Models/Monster";
+import { Paragraph } from "../Models/Paragraph";
+import { User } from "../Models/user";
 
 // https://dev.to/franciscomendes10866/how-to-use-sequelize-orm-with-typescript-3no
 const DbConnection = new Sequelize({
@@ -9,7 +14,14 @@ const DbConnection = new Sequelize({
     username: 'pi',
     password: 'rxmdnq88',
     logging:false,
-    models:[User],
+    models:[
+        User,
+        Paragraph,
+        Choice,
+        Encounter,
+        Item,
+        Monster
+    ],
 });
 
 export default DbConnection;
