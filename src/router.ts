@@ -5,6 +5,7 @@ import { ChoiceController } from "./Controllers/ChoiceController";
 import { MonsterController } from "./Controllers/MonsterController";
 import { ParagraphController } from "./Controllers/ParagraphController";
 import { UserController } from "./Controllers/UserController";
+import 'express-async-errors';
 
 export const router:Router = express.Router();
 

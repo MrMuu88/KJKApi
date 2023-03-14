@@ -1,8 +1,10 @@
 import express,{Express} from 'express';
 import DbConnection from './Database/DbConnection';
+import ErrorHandlingMiddleware from './Middlewares/ErrorHandlingMiddleware';
+import HeaderMiddleware from './Middlewares/HeaderMiddleware';
 import {router} from "./router";
 
-
+DbConnection.sync({alter:true});
 
 const app: Express = express();
 
@@ -12,6 +14,6 @@ app.listen(3031,()=>{
 
 app.use(express.json());
 
+app.use(HeaderMiddleware);
 app.use(router);
-
-DbConnection.sync({alter:true});
+app.use(ErrorHandlingMiddleware);
