@@ -1,7 +1,10 @@
+import DbConnection from "../Database/DbConnection";
 import {Request, Response} from "express";
 import { QueryTypes } from "sequelize";
-import DbConnection from "../Database/DbConnection";
 import { Choice } from "../Models/Choice";
+import { Encounter } from "../Models/Encounter";
+import { Item } from "../Models/Item";
+import { Monster } from "../Models/Monster";
 import { Paragraph } from "../Models/Paragraph";
 
 export class ParagraphController{
@@ -17,15 +20,18 @@ export class ParagraphController{
     }
 
     async createParagraph(req:Request,res:Response):Promise<Response>{
-        const newP = req.body as Paragraph;
-        Paragraph.create({...newP});
-        throw "not implemented"
+        var newP = req.body as Paragraph;
+        newP.id = 0; // MariaDB is working with identity insert by default, hence I have to reset the id to 0 to create a new one
+
+        newP = await Paragraph.create({...newP});
+
+        return res.status(201).json(newP).end();
     }
 
     async readParagraph(req:Request,res:Response):Promise<Response>{
-        const {pid} = req.params;
-        const paragraph = await Paragraph.findByPk(pid,{include:[Choice]});
-
+        const id = req.params.pid;
+        const paragraph = await Paragraph.findByPk(id,{include:[Choice,Item,{model:Encounter, include:[Monster,Item]}]});
+        
         if(paragraph === null)
             return res.status(404).end();
         else
@@ -33,11 +39,20 @@ export class ParagraphController{
     }
 
     async updateParagraph(req:Request,res:Response):Promise<Response>{
-        throw "not implemented"
+        const id = req.params.pid;
+        const newP = req.body as Paragraph;
+        newP.id = Number(id);
+
+        const a = await Paragraph.update({...newP},{where:{id}});
+
+        return res.status(200).json(newP).end();
     }
 
     async deleteParagraph(req:Request,res:Response):Promise<Response>{
-        throw "not implemented"
+        var id = req.params.pid;
+        Paragraph.destroy({where:{id}});
+        //TODO have to implement deletition chain
+        return res.status(200).end();
     }
 
 }
