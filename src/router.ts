@@ -24,9 +24,9 @@ router.put("/api/Paragraphs/:pid", new ParagraphController().updateParagraph);
 router.delete("/api/Paragraphs/:pid", new ParagraphController().deleteParagraph);
 
 //MonsterController
-router.get("/api/monsters", (req,res) => {throw ("not implemented");});
-router.get("/api/paragraph/:pid/Monsters", new MonsterController().listMonsters);
-router.post("/api/Monster/paragraph/:pid/monsters", new MonsterController().createMonster);
+router.get("/api/paragraph/:pid/Monsters", new MonsterController().listMonstersByParagraph);
+router.post("/api/paragraph/:pid/monsters", new MonsterController().createMonster);
+router.get("/api/monsters", new MonsterController().listMonsters);
 router.get("/api/Monsters/:mid", new MonsterController().readMonster);
 router.put("/api/Monsters/:mid", new MonsterController().updateMonster);
 router.delete("/api/Monsters/:mid", new MonsterController().deleteMonster);
