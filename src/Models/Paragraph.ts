@@ -14,13 +14,13 @@ export class Paragraph extends Model {
     @Column({type: DataType.TEXT,allowNull:true})
     script!: string;
     
-    @HasMany(()=> Monster)
+    @HasMany(()=> Monster,{onUpdate:"CASCADE",onDelete:"CASCADE", hooks:true})
     monsters!: Monster[];
 
-    @HasMany(()=> Choice)
+    @HasMany(()=> Choice,{onUpdate:"CASCADE",onDelete:"CASCADE", hooks:true})
     choices!: Choice[];
 
-    @HasMany(() => Item)
+    @HasMany(() => Item,{onUpdate:"CASCADE",onDelete:"CASCADE", hooks:true})
     Items!: Item[];
 }
 
