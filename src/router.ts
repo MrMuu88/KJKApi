@@ -32,9 +32,11 @@ router.put("/api/Monsters/:mid", new MonsterController().updateMonster);
 router.delete("/api/Monsters/:mid", new MonsterController().deleteMonster);
 
 //ItemController
-router.get("/api/Items", (req,res) => {throw ("not implemented");});
-router.get("/api/Paragraph/:pid/Items", new ItemController().listItems);
+router.get("/api/Paragraph/:pid/Items", new ItemController().listItemsByParagraph);
 router.post("/api/Paragraph/:pid/Items", new ItemController().createItem);
+router.put("/api/Paragraph/:pid/Items/:iid", new ItemController().updateAmount);
+router.delete("/api/Paragraph/:pid/Items/:iid", new ItemController().removeItemfromParagraph);
+router.get("/api/Items", new ItemController().listItems);
 router.get("/api/Items/:iid", new ItemController().readItem);
 router.put("/api/Items/:iid", new ItemController().updateItem);
 router.delete("/api/Items/:iid", new ItemController().deleteItem);

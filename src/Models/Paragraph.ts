@@ -22,7 +22,7 @@ export class Paragraph extends Model {
     choices!: Choice[];
 
     @BelongsToMany(() => Item,{through:{model: () => Loot}})
-    Items!: Item[];
+    items!: Item[];
 }
 
 
