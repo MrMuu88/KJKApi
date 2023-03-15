@@ -21,11 +21,17 @@ export class ParagraphController{
 
     async createParagraph(req:Request,res:Response):Promise<Response>{
         var newP = req.body as Paragraph;
-        newP.id = 0; // MariaDB is working with identity insert by default, hence I have to reset the id to 0 to create a new one
+        if(!req.query.exactId)
+            newP.id = 0;
 
-        newP = await Paragraph.create({...newP});
+        const result = await Paragraph.upsert({...newP});
+        
+        if(result[1])
+            res.status(201); //the query inserted a new row
+        else
+            res.status(200); // the queyr updated an existing row
 
-        return res.status(201).json(newP).end();
+        return res.json(result[0]).end();
     }
 
     async readParagraph(req:Request,res:Response):Promise<Response>{
@@ -39,18 +45,20 @@ export class ParagraphController{
     }
 
     async updateParagraph(req:Request,res:Response):Promise<Response>{
-        const id = req.params.pid;
+        const pid = Number(req.params.pid);
         const newP = req.body as Paragraph;
-        newP.id = Number(id);
+        newP.id = pid;
 
-        const a = await Paragraph.update({...newP},{where:{id}});
-
-        return res.status(200).json(newP).end();
+        const result = await Paragraph.update({...newP},{where:{id:pid}});
+        if(result[0] == 1)
+            return res.status(200).json(newP).end();
+        else
+            return res.status(404).end();
     }
 
     async deleteParagraph(req:Request,res:Response):Promise<Response>{
         var id = req.params.pid;
-        Paragraph.destroy({where:{id}});
+        var count = await Paragraph.destroy({where:{id}});
         //TODO have to implement deletition chain
         return res.status(200).end();
     }
