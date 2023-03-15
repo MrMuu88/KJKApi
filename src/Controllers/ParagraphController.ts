@@ -35,7 +35,7 @@ export class ParagraphController{
 
     async readParagraph(req:Request,res:Response):Promise<Response>{
         const id = req.params.pid;
-        const paragraph = await Paragraph.findByPk(id,{include:[Choice,Item,Monster,Item]});
+        const paragraph = await Paragraph.findByPk(id,{include:[Choice,Monster,Item]});
         
         if(paragraph === null)
             return res.status(404).end();

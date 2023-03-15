@@ -1,18 +1,14 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
+import {Loot} from "./loot";
 import { Paragraph } from "./Paragraph";
 
 @Table({timestamps:false,tableName:"Items"})
 export class Item extends Model{
     @Column({type:DataType.INTEGER.UNSIGNED,autoIncrement:true,primaryKey:true})
     id!:number;
-
-    @ForeignKey(()=> Paragraph)
-    @Column({type:DataType.INTEGER.UNSIGNED, allowNull:true})
-    paragraphId!:number;
-
-    @BelongsTo(()=> Paragraph)
+  
+    @BelongsToMany(()=> Paragraph,{through:{model: () => Loot}})
     paragraph!:Paragraph;
-
 
     @Column({type:DataType.STRING,allowNull:false})
     name!: string;

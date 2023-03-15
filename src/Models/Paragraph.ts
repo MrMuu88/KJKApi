@@ -1,6 +1,7 @@
-import {Table,Column, Model,DataType,HasMany,HasOne} from "sequelize-typescript";
+import { Table, Column, Model, DataType, HasMany, BelongsToMany} from "sequelize-typescript";
 import { Choice } from "./Choice";
 import { Item } from "./Item";
+import { Loot } from "./loot";
 import { Monster } from "./Monster";
 
 @Table({timestamps:false,tableName:"Paragraphs"})
@@ -20,7 +21,7 @@ export class Paragraph extends Model {
     @HasMany(()=> Choice,{onUpdate:"CASCADE",onDelete:"CASCADE", hooks:true})
     choices!: Choice[];
 
-    @HasMany(() => Item,{onUpdate:"CASCADE",onDelete:"CASCADE", hooks:true})
+    @BelongsToMany(() => Item,{through:{model: () => Loot}})
     Items!: Item[];
 }
 

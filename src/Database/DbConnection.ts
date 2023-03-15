@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import { Choice } from "../Models/Choice";
 import { Item } from "../Models/Item";
+import { Loot } from "../Models/loot";
 import { Monster } from "../Models/Monster";
 import { Paragraph } from "../Models/Paragraph";
 import { User } from "../Models/user";
@@ -18,7 +19,8 @@ const DbConnection = new Sequelize({
         Paragraph,
         Choice,
         Item,
-        Monster
+        Monster,
+        Loot
     ],
 });
 
