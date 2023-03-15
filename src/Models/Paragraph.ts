@@ -1,7 +1,7 @@
 import {Table,Column, Model,DataType,HasMany,HasOne} from "sequelize-typescript";
 import { Choice } from "./Choice";
-import { Encounter } from "./Encounter";
 import { Item } from "./Item";
+import { Monster } from "./Monster";
 
 @Table({timestamps:false,tableName:"Paragraphs"})
 export class Paragraph extends Model {
@@ -13,9 +13,9 @@ export class Paragraph extends Model {
 
     @Column({type: DataType.TEXT,allowNull:true})
     script!: string;
-
-    @HasOne(()=> Encounter)
-    encounter!: Encounter;
+    
+    @HasMany(()=> Monster)
+    monsters!: Monster[];
 
     @HasMany(()=> Choice)
     choices!: Choice[];

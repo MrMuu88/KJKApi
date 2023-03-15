@@ -2,7 +2,6 @@ import DbConnection from "../Database/DbConnection";
 import {Request, Response} from "express";
 import { QueryTypes } from "sequelize";
 import { Choice } from "../Models/Choice";
-import { Encounter } from "../Models/Encounter";
 import { Item } from "../Models/Item";
 import { Monster } from "../Models/Monster";
 import { Paragraph } from "../Models/Paragraph";
@@ -36,7 +35,7 @@ export class ParagraphController{
 
     async readParagraph(req:Request,res:Response):Promise<Response>{
         const id = req.params.pid;
-        const paragraph = await Paragraph.findByPk(id,{include:[Choice,Item,{model:Encounter, include:[Monster,Item]}]});
+        const paragraph = await Paragraph.findByPk(id,{include:[Choice,Item,Monster,Item]});
         
         if(paragraph === null)
             return res.status(404).end();

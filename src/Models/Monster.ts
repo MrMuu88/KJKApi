@@ -1,17 +1,17 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Encounter } from "./Encounter";
+import { Paragraph } from "./Paragraph";
 
 @Table({timestamps:false,tableName:"Monsters"})
 export class Monster extends Model{
     @Column({type:DataType.INTEGER.UNSIGNED,autoIncrement:true,primaryKey:true})
     id!:number;
 
-    @ForeignKey(()=> Encounter)
+    @ForeignKey(()=> Paragraph)
     @Column({type:DataType.INTEGER.UNSIGNED, allowNull:true})
-    encounterId!:number;
+    paragraphId!:number;
 
-    @BelongsTo(()=> Encounter)
-    encounter!:Encounter;
+    @BelongsTo(()=> Paragraph)
+    paragraph!:Paragraph;
 
 
 

@@ -1,5 +1,4 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { Encounter } from "./Encounter";
 import { Paragraph } from "./Paragraph";
 
 @Table({timestamps:false,tableName:"Items"})
@@ -13,14 +12,6 @@ export class Item extends Model{
 
     @BelongsTo(()=> Paragraph)
     paragraph!:Paragraph;
-
-    @ForeignKey(()=>Encounter)
-    @Column({type:DataType.INTEGER.UNSIGNED, allowNull:true})
-    encounterId!:number;
-
-    @BelongsTo(()=> Encounter)
-    encounter!:Encounter;
-
 
 
     @Column({type:DataType.STRING,allowNull:false})
