@@ -5,7 +5,7 @@ export class AppSettings{
     databaseConfig !: DatabaseConfig;
 }
 
-const appSettings: AppSettings = require('../Appsettings.json');
+const appSettings: AppSettings = require('../AppSettings.json');
 
 export default appSettings;
 
