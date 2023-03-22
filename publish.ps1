@@ -1,11 +1,11 @@
-#clear dist
+write-host "clear dist folder"
 Remove-Item .\dist -Recurse
 
-#build without maps
+write-host "build without sourcemaps"
 tsc --sourcemap false
 
-#copy node modules inside dist directory
+write-host "copy node modules inside dist directory"
 Copy-Item .\node_modules .\dist -Recurse
 
-#copy the apsetting file
+write-host "copy the apsetting file"
 copy-item .\src\AppSettings.json .\dist\AppSettings.json

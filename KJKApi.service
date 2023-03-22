@@ -1,0 +1,13 @@
+[Unit]
+Description= KJK Api Service
+After = network.target
+
+[Service]
+WorkingDirectory=/home/pi/KJKApi
+ExecStart=/usr/bin/node App.js
+Restart=on-failure
+User=pi
+Environment=Port=3031
+
+[Install]
+WantedBy=multi-user.target

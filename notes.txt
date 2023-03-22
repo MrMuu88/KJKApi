@@ -1,28 +1,12 @@
-for this code I'm following the tutorial: https://hevodata.com/learn/building-a-secure-node-js-rest-api/
+how to create a systemctl service to run the api on the raspberryPi
+    https://simonprickett.dev/writing-a-systemd-service-in-node-js-pi/
 
-step 1:
-    basic project creation:
-    //src/index.js
-    //package.json
-    //notes.txt         *this file
+create a service file => see 'KJKApi.Service'
 
-step 2:
-    installed dependecy packages:
-        `npm install body-parser cors express helmet morgan`
+copy it to the '/etc/systemd/system' folder on the pi
 
-    in the indexjs file:
-        initialized the express application
-        added a simple in memory array to mock a datastore
-        configured dependecies
-        created a single GET endpoint
+Enable the service woth the following command
+    sudo systemctl enable KJKApi.service
 
-step 3:
-    the tutorial starts to use mongoose wich is a mongo db ODM system,
-    but I don't like going that way.
-    I would like to explore how can i define the api endpoints with express
-    first
-
-    dsicontinuing the tutorial.
-
-I'm startig to inquire about nodejs express module
-an interesting tutorial about routing: https://expressjs.com/en/guide/routing.html
+get logs:
+    journalctl -u KJKApi
