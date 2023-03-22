@@ -8,4 +8,4 @@ tsc --sourcemap false
 Copy-Item .\node_modules .\dist -Recurse
 
 #copy the apsetting file
-copy-item .\src\AppSettings.default.json .\dist\AppSettings.json
+copy-item .\src\AppSettings.json .\dist\AppSettings.json
